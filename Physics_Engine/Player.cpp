@@ -1,9 +1,10 @@
 #include "Player.h"
+#include "Game.h"
 
 // Constructor
-Player::Player(float x, float y) {
+Player::Player() {
 
-    this->shape.setPosition(sf::Vector2f(195.f, 195.f));
+    this->shape.setPosition(sf::Vector2f(WINDOW_WIDTH/2.f - PLAYER_WIDTH/2.f, WINDOW_HEIGHT/2.f - PLAYER_HEIGHT/2));
 
     this->initShape();
     this->initVariables();
@@ -27,7 +28,7 @@ void Player::initVariables() {
 
 void Player::initShape() {
     this->shape.setFillColor(sf::Color::Blue);
-    this->shape.setSize(sf::Vector2f(20.f, 20.f));
+    this->shape.setSize(sf::Vector2f(PLAYER_WIDTH, PLAYER_HEIGHT));
 }
 
 // Public
@@ -100,4 +101,11 @@ float Player::getVelx() {
 
 float Player::getVely() {
     return this->vely;
+}
+
+std::pair <int, int> Player::getCoords() {
+    std::pair <int, int> coords;
+    coords.first = (int)((this->getPosx() + PLAYER_WIDTH/2)/RESOLUTION_WIDTH);
+    coords.second = (int)((this->getPosy() + PLAYER_HEIGHT/2)/RESOLUTION_HEIGHT);
+    return coords;
 }

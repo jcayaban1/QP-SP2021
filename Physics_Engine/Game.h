@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <ctime>
 
@@ -7,6 +9,12 @@
 
 #include "Player.h"
 #include "Wall.h"
+
+#define WINDOW_WIDTH 400
+#define WINDOW_HEIGHT 400
+#define RESOLUTION_WIDTH 4
+#define RESOLUTION_HEIGHT 4
+#define FRAMERATE 60
 
 class Game {
     public:
@@ -30,7 +38,9 @@ class Game {
         void handleOutOfBounds();
 
         void handleCollisions();
+        void playerWindowCollision();
         void playerWallCollision();
+        bool playerWallOverlap();
 
     private:
 

@@ -1,10 +1,5 @@
 #include "Game.h"
 
-#define SCREEN_WIDTH 400
-#define SCREEN_HEIGHT 400
-#define PERSON_WIDTH 10.0
-#define PERSON_HEIGHT 10.0
-
 int main() {
 
     // Initialize Random Seed

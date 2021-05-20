@@ -4,12 +4,17 @@
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
 
+#include <utility>
+
+#define PLAYER_WIDTH 20.f
+#define PLAYER_HEIGHT 20.f
+
 class Player {
 
     public:
 
         // Constructors and Destructors
-        Player(float x = 0.f, float y = 0.f);
+        Player();
         virtual ~Player();
 
         void updateInput();
@@ -24,6 +29,8 @@ class Player {
         void changeVelocity(float velxprime, float velyprime);
         float getVelx();
         float getVely();
+
+        std::pair <int, int> getCoords();
 
     private:
 
