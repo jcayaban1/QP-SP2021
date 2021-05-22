@@ -11,8 +11,8 @@
 #include <stack>
 #include <utility>
 
-#define RESOLUTION_WIDTH 5
-#define RESOLUTION_HEIGHT 5
+#define RESOLUTION_WIDTH 15
+#define RESOLUTION_HEIGHT 15
 
 class Cell { // must go before Maze
     public:
@@ -21,7 +21,11 @@ class Cell { // must go before Maze
     bool isDownFree;
     bool visited;
 
+    sf::RectangleShape rightWall;
+    sf::RectangleShape downWall;
+
     private:
+
 };
 
 class Maze {

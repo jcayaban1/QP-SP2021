@@ -6,7 +6,7 @@
 
 #include <utility>
 
-#define PLAYER_WIDTH 20.f
+#define PLAYER_WIDTH 20.f //FIXME: Need to be able to scale player size with maze cell size. Note that Game.cpp contains these defines.
 #define PLAYER_HEIGHT 20.f
 
 class Player {

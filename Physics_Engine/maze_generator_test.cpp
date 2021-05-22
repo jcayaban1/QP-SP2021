@@ -4,13 +4,26 @@
 //Const and Dest
 
 Maze::Maze() {
+
     this->cell = new Cell [RESOLUTION_WIDTH * RESOLUTION_HEIGHT]; // allocate memory for w*h cells
     // Matrix elements will be accessed in the form "cell[x * width + y]"
+
     for(int i = 0; i < RESOLUTION_WIDTH * RESOLUTION_HEIGHT; i++) { // init cell[] attributes to false
         this->cell[i].visited = false;
         this->cell[i].isRightFree = false;
         this->cell[i].isDownFree = false;
+
+        // Set wall sizes and positions //FIXME: need to adjust a bit for corners
+        float cw = (float)(WINDOW_WIDTH / RESOLUTION_WIDTH);
+        float ch = (float)(WINDOW_HEIGHT / RESOLUTION_HEIGHT);
+
+        this->cell[i].rightWall.setSize(sf::Vector2f(cw/20.f, ch));
+        this->cell[i].downWall.setSize(sf::Vector2f(cw, ch/20.f));
+
+        this->cell[i].rightWall.setPosition(sf::Vector2f(cw * (i/RESOLUTION_WIDTH + 1) - (cw/40.f), ch * (i%RESOLUTION_HEIGHT)));
+        this->cell[i].downWall.setPosition(sf::Vector2f(cw * (i/RESOLUTION_WIDTH), ch * (i%RESOLUTION_HEIGHT + 1) - (ch/40.f)));
     }
+
 }
 
 Maze::~Maze() {
@@ -104,12 +117,11 @@ void Maze::generate() {
     }
 }
 
-/*void Maze::render(sf::RenderTarget* target) {
+void Maze::render(sf::RenderTarget* target) {
 
-
-    float cw = (float)(WINDOW_WIDTH / RESOLUTION_WIDTH);
-    float ch = (float)(WINDOW_HEIGHT / RESOLUTION_HEIGHT);
     for(int i = 0; i < RESOLUTION_WIDTH * RESOLUTION_HEIGHT; i++) {
-        if(!this->cell[i].isRightFree) target->draw
+        if(!this->cell[i].isRightFree) target->draw(this->cell[i].rightWall);
+        if(!this->cell[i].isDownFree) target->draw(this->cell[i].downWall);
     }
-}*/
+
+}

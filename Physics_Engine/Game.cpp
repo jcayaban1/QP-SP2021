@@ -48,9 +48,10 @@ void Game::render() {
     this->maze.render(this->window);
 
 
-    /*/////////////////////////////////////// FIXME: Restore when finished with maze generator
+    
     this->player.render(this->window);
 
+    /*/////////////////////////////////////// FIXME: Restore when finished with maze generator
     this->wall.render(this->window);
     *////////////////////////////////////////
 
@@ -66,13 +67,13 @@ void Game::update() {
 
 
 
-/*/////////////////////////////////////////////////// FIXME: Restore when finished with maze generator
+
     this->player.update(this->window);
 
     this->handleOutOfBounds();
 
     this->handleCollisions();
-*////////////////////////////////////////////////////
+
 
 
 
@@ -112,7 +113,7 @@ void Game::handleOutOfBounds() {
 
 void Game::handleCollisions() {
     playerWindowCollision();
-    playerWallCollision(); //FIXME: Only works for single rectangular wall. Need to update for maze walls
+    //playerWallCollision(); //FIXME: Only works for single rectangular wall. Need to update for maze walls
 }
 
 void Game::playerWindowCollision() {
