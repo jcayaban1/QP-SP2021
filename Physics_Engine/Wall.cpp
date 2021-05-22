@@ -1,5 +1,6 @@
 #include "Wall.h"
 #include "Game.h"
+#include "maze_generator_test.h" //FIXME: delete after finishing maze gen alg
 
 // Constructor
 Wall::Wall() {
@@ -29,7 +30,7 @@ Wall::~Wall() {
 
 }
 
-void Wall::drawWalls() { //FIXME: need to figure out segmentation fault
+void Wall::drawWalls() {
 
     srand(static_cast<unsigned>(time(0)));
 

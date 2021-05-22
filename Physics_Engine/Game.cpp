@@ -14,7 +14,8 @@ void Game::initWindow() {
 void Game::initVariables() {
 
     this->endGame = false;
-    this->wall.drawWalls();
+    //this->wall.drawWalls();
+    this->maze.generate();
 
 }
 
@@ -43,11 +44,19 @@ void Game::render() {
     this->window->clear();
 
     // Render stuff
+
+    this->maze.render(this->window);
+
+
+    /*/////////////////////////////////////// FIXME: Restore when finished with maze generator
     this->player.render(this->window);
 
     this->wall.render(this->window);
+    *////////////////////////////////////////
 
+    
     this->window->display();
+    
 
 }
 
@@ -55,11 +64,18 @@ void Game::update() {
 
     this->pollEvents();
 
+
+
+/*/////////////////////////////////////////////////// FIXME: Restore when finished with maze generator
     this->player.update(this->window);
 
     this->handleOutOfBounds();
 
     this->handleCollisions();
+*////////////////////////////////////////////////////
+
+
+
 
     // Check to see if getting correct coordinates
     // std::cout << this->player.getCoords().first << ' ' << this->player.getCoords().second << std::endl;

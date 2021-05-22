@@ -9,11 +9,10 @@
 
 #include "Player.h"
 #include "Wall.h"
+#include "maze_generator_test.h"
 
 #define WINDOW_WIDTH 400
 #define WINDOW_HEIGHT 400
-#define RESOLUTION_WIDTH 4
-#define RESOLUTION_HEIGHT 4
 #define FRAMERATE 60
 
 class Game {
@@ -55,4 +54,5 @@ class Game {
 
         Player player;
         Wall wall;
+        Maze maze;
 };
