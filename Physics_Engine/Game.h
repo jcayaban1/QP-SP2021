@@ -8,7 +8,7 @@
 #include <SFML/System.hpp>
 
 #include "Player.h"
-#include "Wall.h"
+//#include "Wall.h"
 #include "maze_generator_test.h"
 
 #define WINDOW_WIDTH 400
@@ -53,6 +53,6 @@ class Game {
         void initWindow();
 
         Player player;
-        Wall wall;
+        //Wall wall;
         Maze maze;
 };

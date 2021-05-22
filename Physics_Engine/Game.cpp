@@ -136,7 +136,7 @@ void Game::playerWindowCollision() {
     }
 }
 
-void Game::playerWallCollision() {
+/*void Game::playerWallCollision() {
     if(Game::playerWallOverlap()) {
         wall.changeColor();
 
@@ -166,11 +166,11 @@ void Game::playerWallCollision() {
         else player.changeVelocity(-player.getVelx(), player.getVely());
     }
     else wall.revertColor();
-}
+}*/
 
-bool Game::playerWallOverlap() {
+/*bool Game::playerWallOverlap() {
     if((player.getPosx() < (wall.getPosx() + wall.getSizex())) && ((player.getPosx() + PLAYER_WIDTH) > wall.getPosx())) {
         if((player.getPosy() < (wall.getPosy() + wall.getSizey())) && ((player.getPosy() + PLAYER_HEIGHT) > wall.getPosy())) return true;
     }
     return false;
-}
+}*/
