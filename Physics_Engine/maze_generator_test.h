@@ -1,8 +1,8 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
+#include "SFML/Graphics.hpp"
+#include "SFML/Window.hpp"
+#include "SFML/System.hpp"
 
 #include <iostream>
 #include <vector>
@@ -11,8 +11,8 @@
 #include <stack>
 #include <utility>
 
-#define RESOLUTION_WIDTH 15
-#define RESOLUTION_HEIGHT 15
+#define RESOLUTION_WIDTH 10
+#define RESOLUTION_HEIGHT 10
 
 class Cell { // must go before Maze
     public:

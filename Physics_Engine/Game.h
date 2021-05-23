@@ -3,16 +3,16 @@
 #include <iostream>
 #include <ctime>
 
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
+#include "SFML/Graphics.hpp"
+#include "SFML/Window.hpp"
+#include "SFML/System.hpp"
 
 #include "Player.h"
 //#include "Wall.h"
 #include "maze_generator_test.h"
 
-#define WINDOW_WIDTH 400
-#define WINDOW_HEIGHT 400
+#define WINDOW_WIDTH 600
+#define WINDOW_HEIGHT 600
 #define FRAMERATE 60
 
 class Game {
@@ -38,8 +38,9 @@ class Game {
 
         void handleCollisions();
         void playerWindowCollision();
-        void playerWallCollision();
-        bool playerWallOverlap();
+        //void playerWallCollision(); // NOT IN USE
+        //bool playerWallOverlap(); // NOT IN USE
+        void playerMazeCollision();
 
     private:
 

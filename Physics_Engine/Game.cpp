@@ -4,7 +4,7 @@
 void Game::initWindow() {
 
     this->videoMode = sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT);
-    this->window = new sf::RenderWindow(this->videoMode, "Physics Engine", sf::Style::Close | sf::Style::Titlebar);
+    this->window = new sf::RenderWindow(this->videoMode, "Cel", sf::Style::Close | sf::Style::Titlebar);
     this->window->setKeyRepeatEnabled(false);
 
     this->window->setFramerateLimit(FRAMERATE);
@@ -114,29 +114,30 @@ void Game::handleOutOfBounds() {
 void Game::handleCollisions() {
     playerWindowCollision();
     //playerWallCollision(); //FIXME: Only works for single rectangular wall. Need to update for maze walls
+    playerMazeCollision();
 }
 
 void Game::playerWindowCollision() {
     // Horizontal
     if(player.getPosx() <= 0.f) {
-        player.changeVelocity(-player.getVelx(), player.getVely());
+        player.changeVelocity(0.f, player.getVely());
     }
 
     if(player.getPosx() + PLAYER_WIDTH >= WINDOW_WIDTH) {
-        player.changeVelocity(-player.getVelx(), player.getVely());
+        player.changeVelocity(0.f, player.getVely());
     }
 
     // Vertical
     if(player.getPosy() <= 0.f) {
-        player.changeVelocity(player.getVelx(), -player.getVely());
+        player.changeVelocity(player.getVelx(), 0.f);
     }
 
     if(player.getPosy() + PLAYER_HEIGHT >= WINDOW_HEIGHT) {
-        player.changeVelocity(player.getVelx(), -player.getVely());
+        player.changeVelocity(player.getVelx(), 0.f);
     }
 }
 
-/*void Game::playerWallCollision() {
+/*void Game::playerWallCollision() { // NOT IN USE
     if(Game::playerWallOverlap()) {
         wall.changeColor();
 
@@ -168,9 +169,65 @@ void Game::playerWindowCollision() {
     else wall.revertColor();
 }*/
 
-/*bool Game::playerWallOverlap() {
+/*bool Game::playerWallOverlap() { // NOT IN USE
     if((player.getPosx() < (wall.getPosx() + wall.getSizex())) && ((player.getPosx() + PLAYER_WIDTH) > wall.getPosx())) {
         if((player.getPosy() < (wall.getPosy() + wall.getSizey())) && ((player.getPosy() + PLAYER_HEIGHT) > wall.getPosy())) return true;
     }
     return false;
 }*/
+
+void Game::playerMazeCollision() {
+    int player_Cell = this->player.getCoords().first * RESOLUTION_WIDTH + this->player.getCoords().second;
+    bool left_wall = !this->maze.cell[player_Cell - RESOLUTION_WIDTH].isRightFree;
+    bool right_wall = !this->maze.cell[player_Cell].isRightFree;
+    bool up_wall = !this->maze.cell[player_Cell - 1].isDownFree;
+    bool down_wall = !this->maze.cell[player_Cell].isDownFree;
+
+    float cw = WINDOW_WIDTH/RESOLUTION_WIDTH; // Cell width
+    float ch = WINDOW_HEIGHT/RESOLUTION_HEIGHT; // Cell height
+
+    // Check to see if getting correct coordinates
+    std::cout << left_wall << ' ' << player_Cell << std::endl;
+
+    if(left_wall) {
+        if(player.getPosx() <= player.getCoords().first * cw + cw/30.f) {
+            player.changeVelocity(0.f, player.getVely());
+
+            if(!(player.getCoords().first * cw - player.getPosx() > PLAYER_WIDTH/2)) { // handles phasing through walls
+
+                player.changePosition(player.getCoords().first * cw + cw/30.f, player.getPosy()); // stop player from moving
+            }
+        }
+    }
+    if(right_wall) {
+        if(player.getPosx() + PLAYER_WIDTH >= (player.getCoords().first + 1) * cw - cw/30.f) {
+            player.changeVelocity(0.f, player.getVely());
+
+            if(!(player.getPosx() - ((player.getCoords().first + 1) * cw - PLAYER_WIDTH) > PLAYER_WIDTH/2)) {
+
+                player.changePosition((player.getCoords().first + 1) * cw  - cw/30.f - PLAYER_WIDTH, player.getPosy());
+            }
+        }
+    }
+    if(up_wall) {
+        if(player.getPosy() <= player.getCoords().second * ch + ch/30.f) {
+            player.changeVelocity(player.getVelx(), 0.f);
+
+            if(!(player.getCoords().second * ch - player.getPosy() > PLAYER_HEIGHT/2)) {
+
+                player.changePosition(player.getPosx(), player.getCoords().second * ch + cw/30.f);
+            }
+        }
+    }
+    if(down_wall) {
+        if(player.getPosy() + PLAYER_HEIGHT >= (player.getCoords().second + 1) * cw - ch/30.f) {
+            player.changeVelocity(player.getVelx(), 0.f);
+
+            if(!(player.getPosy() - ((player.getCoords().second + 1) * cw - PLAYER_HEIGHT) > PLAYER_HEIGHT/2)) {
+
+                player.changePosition(player.getPosx(), (player.getCoords().second + 1) * cw - ch/30.f - PLAYER_HEIGHT);
+            }
+        }
+    }
+    
+}

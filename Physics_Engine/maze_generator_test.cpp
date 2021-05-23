@@ -17,8 +17,8 @@ Maze::Maze() {
         float cw = (float)(WINDOW_WIDTH / RESOLUTION_WIDTH);
         float ch = (float)(WINDOW_HEIGHT / RESOLUTION_HEIGHT);
 
-        this->cell[i].rightWall.setSize(sf::Vector2f(cw/20.f, ch));
-        this->cell[i].downWall.setSize(sf::Vector2f(cw, ch/20.f));
+        this->cell[i].rightWall.setSize(sf::Vector2f(cw/15.f, ch)); //denom of cw/num determines thickness of walls
+        this->cell[i].downWall.setSize(sf::Vector2f(cw, ch/15.f));
 
         this->cell[i].rightWall.setPosition(sf::Vector2f(cw * (i/RESOLUTION_WIDTH + 1) - (cw/40.f), ch * (i%RESOLUTION_HEIGHT)));
         this->cell[i].downWall.setPosition(sf::Vector2f(cw * (i/RESOLUTION_WIDTH), ch * (i%RESOLUTION_HEIGHT + 1) - (ch/40.f)));

@@ -1,10 +1,15 @@
 #include "Player.h"
 #include "Game.h"
+#include "maze_generator_test.h"
 
 // Constructor
 Player::Player() {
 
-    this->shape.setPosition(sf::Vector2f(WINDOW_WIDTH/2.f - PLAYER_WIDTH/2.f, WINDOW_HEIGHT/2.f - PLAYER_HEIGHT/2));
+    int randxcoord = rand()%RESOLUTION_WIDTH;
+    int randycoord = rand()%RESOLUTION_HEIGHT;
+    float randxpos = randxcoord * WINDOW_WIDTH / RESOLUTION_WIDTH;
+    float randypos = randycoord * WINDOW_HEIGHT / RESOLUTION_HEIGHT;
+    this->shape.setPosition(sf::Vector2f(randxpos, randypos));
 
     this->initShape();
     this->initVariables();
@@ -16,10 +21,10 @@ Player::~Player() {
 
 }
 
-//Private
+// Private
 void Player::initVariables() {
 
-    this->movementSpeed = 0.5f;
+    this->movementSpeed = 0.2f;
 
     this->velx = 0.f;
     this->vely = 0.f;
@@ -105,7 +110,7 @@ float Player::getVely() {
 
 std::pair <int, int> Player::getCoords() {
     std::pair <int, int> coords;
-    coords.first = (int)((this->getPosx() + PLAYER_WIDTH/2)/RESOLUTION_WIDTH);
-    coords.second = (int)((this->getPosy() + PLAYER_HEIGHT/2)/RESOLUTION_HEIGHT);
+    coords.first = (int)((this->getPosx() + PLAYER_WIDTH/2) * RESOLUTION_WIDTH / WINDOW_WIDTH);
+    coords.second = (int)((this->getPosy() + PLAYER_HEIGHT/2) * RESOLUTION_HEIGHT / WINDOW_HEIGHT);
     return coords;
 }
