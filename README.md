@@ -1,12 +1,11 @@
 # QP-SP2021
 Spring 2021 Quarterly Project
 
-How to run physics engine on macOS terminal:
-g++ *.cpp -c
+NOTE: You must have pyserial and pygame installed to run Cel.
 
-g++ *.o -lsfml-graphics -lsfml-window -lsfml-system -o physics
-
-./physics
+How to run Cel on macOS terminal:
+1. Navigate to the Cel directory in your terminal
+2. Use the command "python3 main.py" (or other python compiler)
 
 The not_using directory contains old code. We save them here just in case we need them again or need to refer to them.
 
