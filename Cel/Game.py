@@ -8,8 +8,8 @@ import Maze
 WINDOW_WIDTH = 600
 WINDOW_HEIGHT = 600
 
-RESOLUTION_WIDTH = 15
-RESOLUTION_HEIGHT = 15
+RESOLUTION_WIDTH = 10
+RESOLUTION_HEIGHT = 10
 
 CW = WINDOW_WIDTH/RESOLUTION_WIDTH
 CH = WINDOW_HEIGHT/RESOLUTION_HEIGHT
@@ -23,7 +23,7 @@ bg_color = (0, 0, 0)
 
 class Game:
 
-    def __init__(self):
+    def __init__(self, num_players):
 
         self.ser = serial.Serial("/dev/cu.usbmodem14101") # Connect to serial port
 
@@ -35,10 +35,14 @@ class Game:
         pygame.display.set_caption('Cel')
         self.screen.fill(bg_color)
 
+        self.num_players = num_players
+
         self.players = []
-        for i in range(4): # change depending on how many players you want
+        for i in range(num_players): # change depending on how many players you want
             self.players.append(Player.Player(self.screen))
-        self.maze = Maze.Maze(self.screen)
+        self.maze = Maze.Maze(num_players, self.screen)
+
+        self.game_over = False
 
         pygame.display.update()
 
@@ -65,13 +69,42 @@ class Game:
 
         self.playerPlayerCollisions()
 
+        if self.check_win():
+            self.game_over = True
+
 
     def render(self):
-        self.screen.fill(bg_color)
+        if self.game_over:
+            self.screen.fill(bg_color)
+            game_over_font = pygame.font.Font("joystix monospace.ttf", 70)
+            game_over_label = game_over_font.render("You won!", 1, (255, 255, 255))
+            self.screen.blit(game_over_label, (WINDOW_WIDTH/2 - game_over_label.get_width()/2, WINDOW_HEIGHT/2 - game_over_label.get_height()/2))
+            pygame.display.update()
+
+        else:
+            self.screen.fill(bg_color)
+            self.maze.render(self.screen)
+            for player in self.players:
+                player.render(self.screen)
+            pygame.display.update()
+
+    def check_win(self):
+        num_players_on_target = 0
         for player in self.players:
-            player.render(self.screen)
-        self.maze.render(self.screen)
-        pygame.display.update()
+            if self.player_on_target(player):
+                num_players_on_target += 1
+        if num_players_on_target == self.num_players:
+            #print(True) # for debugging
+            return True
+        else:
+            #print(False) # for debugging
+            return False
+
+    def player_on_target(self, player):
+        for i in range(self.num_players):
+            if player.getCoords()[0] == self.maze.target_list[i][0] and player.getCoords()[1] == self.maze.target_list[i][1]:
+                return True
+        return False
 
     def handleOutOfBounds(self, player):
         if player.xpos <= 0:
