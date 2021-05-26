@@ -1,8 +1,8 @@
 import random
 import pygame
 
-RESOLUTION_WIDTH = 10
-RESOLUTION_HEIGHT = 10
+RESOLUTION_WIDTH = 10 # If changed, make same change in Game.py and Maze.py
+RESOLUTION_HEIGHT = 10 # If changed, make same change in Game.py and Maze.py
 
 WINDOW_WIDTH = 600
 WINDOW_HEIGHT = 600
@@ -34,6 +34,7 @@ class Player:
 
     def update(self):
         self.updateInput()
+        self.acceleratePlayer()
         self.movePlayer()
 
     def render(self, window):
@@ -54,8 +55,8 @@ class Player:
             self.yvel = 0
 
     def acceleratePlayer(self):
-        self.xvel = self.xaccel * self.mvspeed
-        self.yvel = self.yaccel * self.mvspeed
+        self.xvel += self.xaccel
+        self.yvel += self.yaccel
 
     def movePlayer(self):
         self.xpos += self.mvspeed * self.xvel

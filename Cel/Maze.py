@@ -1,8 +1,8 @@
 import random
 import pygame
 
-RESOLUTION_WIDTH = 10
-RESOLUTION_HEIGHT = 10
+RESOLUTION_WIDTH = 10 # If changed, make same change in Game.py and Player.py
+RESOLUTION_HEIGHT = 10 # If changed, make same change in Game.py and Player.py
 
 WINDOW_WIDTH = 600
 WINDOW_HEIGHT = 600
@@ -44,7 +44,7 @@ class Maze:
         self.cell_list[startx * w + starty].visited = True
         mazePath = [(startx, starty)]
 
-        print(mazePath[-1]) # for debugging
+        # print(mazePath[-1]) # for debugging
 
         i = 0
         while i < (w * h - 1):

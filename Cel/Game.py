@@ -8,8 +8,8 @@ import Maze
 WINDOW_WIDTH = 600
 WINDOW_HEIGHT = 600
 
-RESOLUTION_WIDTH = 10
-RESOLUTION_HEIGHT = 10
+RESOLUTION_WIDTH = 10 # If changed, make same change in Player.py and Maze.py
+RESOLUTION_HEIGHT = 10 # If changed, make same change in Player.py and Maze.py
 
 CW = WINDOW_WIDTH/RESOLUTION_WIDTH
 CH = WINDOW_HEIGHT/RESOLUTION_HEIGHT
@@ -38,7 +38,7 @@ class Game:
         self.num_players = num_players
 
         self.players = []
-        for i in range(num_players): # change depending on how many players you want
+        for i in range(num_players): # changes depending on how many players you want
             self.players.append(Player.Player(self.screen))
         self.maze = Maze.Maze(num_players, self.screen)
 
@@ -59,7 +59,11 @@ class Game:
         line = self.ser.readline() # Always receive serial input first!
         #print(line.decode("utf"), end = '') # For debugging purposes
 
+        ##### Put line parsing code here #####
+
         for player in self.players:
+            player.xaccel = 0 # FIXME: REPLACE 0's WITH ACCELEROMETER INPUT
+            player.yaccel = 0
             player.update()
         #print(player.getCoords()) # for debugging
 
