@@ -11,10 +11,10 @@ WINDOW_HEIGHT = 600
 RESOLUTION_WIDTH = 10 # If changed, make same change in Player.py and Maze.py
 RESOLUTION_HEIGHT = 10 # If changed, make same change in Player.py and Maze.py
 
-CW = WINDOW_WIDTH/RESOLUTION_WIDTH # Size of each cell
+CW = WINDOW_WIDTH/RESOLUTION_WIDTH
 CH = WINDOW_HEIGHT/RESOLUTION_HEIGHT
 
-PW = CW/1.5 # Player size (MUST BE SAME AS Player.py)
+PW = CW/1.5
 PH = CH/1.5
 
 random.seed()

@@ -25,7 +25,7 @@ class Game:
 
     def __init__(self, num_players):
 
-        self.ser = serial.Serial("/dev/cu.usbmodem14101") # Connect to serial port
+        #self.ser = serial.Serial("/dev/cu.usbmodem14101") # Connect to serial port
 
         pygame.init()
         pygame.font.init()
@@ -56,16 +56,14 @@ class Game:
         return True
 
     def update(self):
-        line = self.ser.readline() # Always receive serial input first!
+        #line = self.ser.readline() # Always receive serial input first!
         #print(line.decode("utf"), end = '') # For debugging purposes
 
         ##### Put line parsing code here #####
 
         for player in self.players:
-            coords = line.decode("utf")
-            coords = coords.split(",")
-            player.xaccel = float(coords[1]) 
-            player.yaccel = float(coords[0])
+            player.xaccel = 0 # FIXME: REPLACE 0's WITH ACCELEROMETER INPUT
+            player.yaccel = 0
             player.update()
         #print(player.getCoords()) # for debugging
 
