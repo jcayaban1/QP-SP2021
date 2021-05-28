@@ -28,6 +28,6 @@ void loop() {
   Serial.print(event.acceleration.y); 
   Serial.print(",");
   Serial.println(event.acceleration.x);
-  delay(150);
+  delay(50);
 
 }
