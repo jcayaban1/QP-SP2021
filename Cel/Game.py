@@ -61,11 +61,12 @@ class Game:
 
         ##### Put line parsing code here #####
 
+        coords = line.decode("utf")
+        coords = coords.split(",")
+
         for player in self.players:
-            coords = line.decode("utf")
-            coords = coords.split(",")
-            player.xaccel = float(coords[1]) 
-            player.yaccel = float(coords[0])
+            player.xaccel = 0.95 * player.xaccel + 0.05 * float(coords[1]) # Low-pass filter to reduce sensitivity
+            player.yaccel = 0.95 * player.yaccel + 0.05 * float(coords[0])
             player.update()
             
         #print(player.getCoords()) # for debugging
